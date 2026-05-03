@@ -61,11 +61,11 @@ nav {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 .nav-name {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
   color: var(--text);
   letter-spacing: 0.02em;
-  font-family: Georgia, serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 .nav-links {
   display: flex;
