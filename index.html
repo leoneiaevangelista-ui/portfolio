@@ -331,15 +331,6 @@
         </div>
       </div>
 
-      <!--
-        CONTACT FORM:
-        Currently uses mailto: — opens the visitor's email client pre-filled
-        with the message, addressed to leoneia.evangelista@gmail.com.
-        No backend, no third-party service needed. Works everywhere.
-
-        To upgrade to a "send without leaving the page" experience, sign up
-        at https://formspree.io and replace the action below with your endpoint.
-      -->
       <form id="contact-form">
         <div class="form-row">
           <div class="field">
@@ -360,7 +351,7 @@
           <textarea id="message" name="message" rows="5" placeholder="Tell me more…" required></textarea>
         </div>
         <div class="form-success" id="form-success">
-          Your email client should open with the message ready to send.
+          Message sent! I'll get back to you soon.
         </div>
         <button type="submit" class="btn btn-primary" style="align-self:flex-start">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -377,24 +368,37 @@
 </footer>
 
 <script>
-  // Open user's email client pre-filled with the message
   const form = document.getElementById('contact-form');
   const success = document.getElementById('form-success');
+  const submitBtn = form.querySelector('button[type="submit"]');
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const subject = document.getElementById('subject').value.trim() || 'Hello from your portfolio';
-    const message = document.getElementById('message').value.trim();
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
 
-    const body = `Hi Leonéia,\n\n${message}\n\n— ${name} (${email})`;
-    const mailto = `mailto:leoneia.evangelista@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const data = {
+      access_key: 'a609b3c0-e2bd-467c-b904-594cc1afd526',
+      name: document.getElementById('name').value,
+      email: document.getElementById('email').value,
+      subject: document.getElementById('subject').value || 'Hello from your portfolio',
+      message: document.getElementById('message').value,
+    };
 
-    window.location.href = mailto;
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data),
+    });
 
-    success.style.display = 'block';
-    setTimeout(() => { success.style.display = 'none'; }, 6000);
+    if (res.ok) {
+      form.reset();
+      success.style.display = 'block';
+      setTimeout(() => { success.style.display = 'none'; }, 6000);
+    }
+
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send message`;
   });
 </script>
 
