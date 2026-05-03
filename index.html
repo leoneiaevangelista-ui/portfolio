@@ -332,18 +332,15 @@
       </div>
 
       <!--
-        CONTACT FORM SETUP (Formspree — free tier, no backend needed):
-        1. Go to https://formspree.io and create a free account
-        2. Click "New Form", name it anything (e.g. "Portfolio Contact")
-        3. Copy the form endpoint URL (looks like: https://formspree.io/f/xxxxxxxx)
-        4. Replace the action value below with your endpoint URL
-        That's it — submissions will be emailed to leoneia.evangelista@gmail.com
+        CONTACT FORM:
+        Currently uses mailto: — opens the visitor's email client pre-filled
+        with the message, addressed to leoneia.evangelista@gmail.com.
+        No backend, no third-party service needed. Works everywhere.
+
+        To upgrade to a "send without leaving the page" experience, sign up
+        at https://formspree.io and replace the action below with your endpoint.
       -->
-      <form
-        action="https://formspree.io/f/YOUR_FORM_ID"
-        method="POST"
-        id="contact-form"
-      >
+      <form id="contact-form">
         <div class="form-row">
           <div class="field">
             <label for="name">Name</label>
@@ -363,7 +360,7 @@
           <textarea id="message" name="message" rows="5" placeholder="Tell me more…" required></textarea>
         </div>
         <div class="form-success" id="form-success">
-          Thanks for reaching out! I'll get back to you soon.
+          Your email client should open with the message ready to send.
         </div>
         <button type="submit" class="btn btn-primary" style="align-self:flex-start">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
@@ -380,23 +377,24 @@
 </footer>
 
 <script>
-  // Handle Formspree AJAX submission for a smooth success message
+  // Open user's email client pre-filled with the message
   const form = document.getElementById('contact-form');
   const success = document.getElementById('form-success');
 
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const data = new FormData(form);
-    const res = await fetch(form.action, {
-      method: 'POST',
-      body: data,
-      headers: { 'Accept': 'application/json' }
-    });
-    if (res.ok) {
-      form.reset();
-      success.style.display = 'block';
-      setTimeout(() => { success.style.display = 'none'; }, 5000);
-    }
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim() || 'Hello from your portfolio';
+    const message = document.getElementById('message').value.trim();
+
+    const body = `Hi Leonéia,\n\n${message}\n\n— ${name} (${email})`;
+    const mailto = `mailto:leoneia.evangelista@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailto;
+
+    success.style.display = 'block';
+    setTimeout(() => { success.style.display = 'none'; }, 6000);
   });
 </script>
 

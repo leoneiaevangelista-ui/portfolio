@@ -1,15 +1,16 @@
 /* ─── Variables ─────────────────────────────────────────────── */
 :root {
-  --primary:     #3B82F6;
-  --secondary:   #8B5CF6;
-  --success:     #16A34A;
-  --warning:     #D97706;
-  --danger:      #DC2626;
-  --text:        #111827;
-  --text-muted:  #6B7280;
-  --bg:          #FFFFFF;
-  --bg-alt:      #F9FAFB;
-  --border:      #E5E7EB;
+  --primary:     #7AA2F7;
+  --secondary:   #BB9AF7;
+  --success:     #9ECE6A;
+  --warning:     #E0AF68;
+  --danger:      #F7768E;
+  --text:        #E6E6EA;
+  --text-muted:  #9AA0AB;
+  --bg:          #1F2128;
+  --bg-alt:      #25272F;
+  --bg-elev:     #2A2D36;
+  --border:      #353944;
   --radius:      8px;
   --max-w:       880px;
 }
@@ -45,8 +46,8 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(8px);
+  background: rgba(31,33,40,0.85);
+  backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--border);
 }
 nav {
@@ -135,14 +136,14 @@ nav {
 }
 .btn-primary {
   background: var(--primary);
-  color: #fff;
+  color: #1F2128;
   border: 1.5px solid var(--primary);
 }
 .btn-primary:hover {
-  background: #2563EB;
-  border-color: #2563EB;
+  background: #92B5F9;
+  border-color: #92B5F9;
   text-decoration: none;
-  color: #fff;
+  color: #1F2128;
 }
 .btn-secondary {
   background: transparent;
@@ -205,7 +206,7 @@ nav {
 }
 .lang-tag {
   display: inline-block;
-  background: var(--bg-alt);
+  background: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 0.2rem 0.6rem;
@@ -240,20 +241,21 @@ nav {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: var(--bg);
+  background: var(--bg-alt);
   border: 2px solid var(--primary);
   z-index: 1;
 }
 .timeline-dot.current { background: var(--primary); }
 .timeline-card {
-  background: var(--bg);
+  background: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.4rem 1.6rem;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s, border-color 0.2s;
 }
 .timeline-card:hover {
-  box-shadow: 0 4px 20px rgba(59,130,246,0.1);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+  border-color: rgba(122,162,247,0.4);
 }
 .timeline-header {
   display: flex;
@@ -272,7 +274,7 @@ nav {
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--primary);
-  background: rgba(59,130,246,0.08);
+  background: rgba(122,162,247,0.12);
   padding: 0.25rem 0.65rem;
   border-radius: 4px;
   white-space: nowrap;
@@ -312,14 +314,15 @@ nav {
   gap: 1.2rem;
 }
 .edu-card {
-  background: var(--bg);
+  background: var(--bg-elev);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 1.4rem;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.2s, border-color 0.2s;
 }
 .edu-card:hover {
-  box-shadow: 0 4px 20px rgba(59,130,246,0.1);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.25);
+  border-color: rgba(122,162,247,0.4);
 }
 .edu-degree {
   font-size: 0.72rem;
@@ -359,7 +362,7 @@ nav {
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 500;
-  background: var(--bg-alt);
+  background: var(--bg-elev);
   border: 1px solid var(--border);
   color: var(--text);
   transition: all 0.2s;
@@ -368,7 +371,7 @@ nav {
 .skill-tag:hover {
   border-color: var(--primary);
   color: var(--primary);
-  background: rgba(59,130,246,0.05);
+  background: rgba(122,162,247,0.1);
 }
 
 /* ─── Contact ───────────────────────────────────────────── */
@@ -432,23 +435,23 @@ input, textarea {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.9rem;
   color: var(--text);
-  background: var(--bg);
+  background: var(--bg-elev);
   transition: border-color 0.2s, box-shadow 0.2s;
   outline: none;
   resize: none;
 }
 input:focus, textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+  box-shadow: 0 0 0 3px rgba(122,162,247,0.15);
 }
 input::placeholder, textarea::placeholder {
-  color: #c0c7d0;
+  color: #6b7280;
 }
 .form-success {
   display: none;
   padding: 1rem;
-  background: rgba(22,163,74,0.08);
-  border: 1px solid rgba(22,163,74,0.25);
+  background: rgba(158,206,106,0.1);
+  border: 1px solid rgba(158,206,106,0.3);
   border-radius: 6px;
   color: var(--success);
   font-size: 0.9rem;
@@ -458,14 +461,15 @@ input::placeholder, textarea::placeholder {
 
 /* ─── Footer ────────────────────────────────────────────────── */
 footer {
-  background: var(--text);
-  color: rgba(255,255,255,0.5);
+  background: #16181E;
+  color: var(--text-muted);
   text-align: center;
   padding: 2rem 1.5rem;
   font-size: 0.8rem;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  border-top: 1px solid var(--border);
 }
-footer a { color: rgba(255,255,255,0.7); }
+footer a { color: var(--text); }
 
 /* ─── Responsive ────────────────────────────────────────────── */
 @media (max-width: 700px) {
